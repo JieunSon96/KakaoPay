@@ -32,9 +32,7 @@ public class CouponService {
     @Autowired
     CouponMessageRepository couponMessageRepository;
 
-    // 쿠폰 생성 서비스(100개씩 batch 생성)
-    // 데이터베이스 상에서 배치를 돌려 10억개 이상 초기에 생성 해놔야 함
-    // 이 서비스는 관리자가 쿠폰 생성 버튼 눌러 동작 시에 쿠폰 1천개 생성
+    // 쿠폰 생성 서비스(9991개씩 생성)
     @Transactional
     public void createCoupon() {
         List<Coupon> coupons = new ArrayList<>();
@@ -45,7 +43,6 @@ public class CouponService {
 
         while (true) {
             if (totalCount == targetCouponCount) {
-                System.out.println("finished all bulk insert for creating the coupons!!!!");
                 break;
             }
 
