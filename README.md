@@ -23,7 +23,145 @@
    * 접속 URI 
    <pre><code>http://localhost:8080</code></pre>
 
+API List
+------------------------- 
+
+### 필수 문제
+  1. 쿠폰 생성 API
+  <pre>
+  URL : /api/coupon/createCoupon
+  Method : POST</pre>
+  
+ * Header
  
+  |토큰|인증권한|
+|------|---|
+|Bearer |ADMIN|
+
+
+  2. 쿠폰 지급 API
+   <pre>
+  URL : /api/coupon/payCoupon
+  Method : POST</pre>
+  
+   * Header
+   
+ |토큰|인증권한|
+|------|---|
+|Bearer |ADMIN,USER|
+
+   * Parameter
+   
+  |구분|타입|필수여부|
+|------|---|---|
+|email|String|Y|
+
+  3. 지급된 쿠폰 조회 API
+   <pre>
+  URL : /api/coupon/viewCoupon
+  Method : GET</pre>
+  
+  * Header
+   
+ |토큰|인증권한|
+|------|---|
+|Bearer |ADMIN,USER|
+
+   * Parameter
+   
+  |구분|타입|필수여부|
+|------|---|---|
+|email|String|Y|
+
+
+  4. 지급된 쿠폰 사용 API   
+<pre>
+  URL : /api/coupon/useCoupon/{couponId}/{utilizationStatus}
+  Method : GET</pre>
+  
+  * Header
+   
+ |토큰|인증권한|
+|------|---|
+|Bearer |USER|
+
+   * Parameter
+   
+  |구분|타입|필수여부|
+|------|---|---|
+|email|String|Y|
+|couponId|Long|Y|
+
+5.지급된 쿠폰 취소 API
+<pre>
+  URL : /api/coupon/useCoupon/{couponId}/{utilizationStatus}
+  Method : GET</pre>
+  
+  * Header
+   
+ |토큰|인증권한|
+|------|---|
+|Bearer |USER|
+
+   * Parameter
+   
+  |구분|타입|필수여부|
+|------|---|---|
+|email|String|Y|
+|couponId|Long|Y|
+
+  6. 발급된 당일 만료된 전체 쿠폰 목록 조회 API
+<pre>
+  URL : /api/coupon/viewExpirationCoupons
+  Method : GET</pre>
+  
+  * Header
+   
+ |토큰|인증권한|
+|------|---|
+|Bearer |ADMIN|
+
+
+### 선택 문제
+  7. 발급된 쿠폰중 만료 3일전 메세지 발송 기능 
+   <pre> 
+   * 스케줄러를 이용하여 매일 오전 9시 30분에 만료 3일 전 쿠폰 조회(getAllCouponsByExpirationDate())
+   * 중복저장을 방지하기 위해 조회 된 데이터가 쿠폰 메세지 테이블에 존재하는지 확인(confirmMessageStoredStatus()), 없는 경우에만 테이블에 저장
+   * 저장시 메세지 확인 컬럼은 default: false
+   * 사용자가 접속해서 메세지를 확인 시 메세지 확인 컬럼은 true로 변경(changeCouponMessageCheckStatus())
+   </pre>
+  
+
+### 제약사항(선택)
+ * JWT을 이용하여 Token 기반 API 인증 기능 개발 및 호출
+ * Spring Security에서 제공하는 
+   * SignUp 로그인 API 
+   
+ <pre>
+ URL : /api/user/signup
+ Method : POST</pre>
+
+   * Parameter
+   
+  |구분|타입|필수여부|
+|------|---|---|
+|email|String|Y|
+|name|String|Y|
+|password|String|Y|   
+   
+   
+   * SignIn 로그인 API 
+   <pre>
+  URL : /api/user/signin
+  Method : POST</pre>
+
+  * Parameter
+   
+  |구분|타입|필수여부|
+|------|---|---|
+|email|String|Y|
+|password|String|Y|
+
 문제 해결
 -------------------------
 1. 쿠폰번호 생성 방법
