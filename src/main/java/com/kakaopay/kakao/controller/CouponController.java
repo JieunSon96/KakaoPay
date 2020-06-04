@@ -9,6 +9,7 @@ import com.kakaopay.kakao.service.CouponService;
 import com.kakaopay.kakao.service.UserService;
 import com.kakaopay.kakao.vo.ApiResponse;
 import com.kakaopay.kakao.vo.UserCouponResponse;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Api(tags={"2. Coupon"})
 @RestController
 @RequestMapping("/api/coupon")
 public class CouponController {

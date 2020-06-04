@@ -1,20 +1,19 @@
 package com.kakaopay.kakao.controller;
 
+import com.kakaopay.kakao.exception.AppException;
 import com.kakaopay.kakao.model.user.Role;
 import com.kakaopay.kakao.model.user.RoleNames;
 import com.kakaopay.kakao.model.user.User;
-import com.kakaopay.kakao.exception.AppException;
-import com.kakaopay.kakao.exception.ResourceNotFoundException;
 import com.kakaopay.kakao.repository.RoleRepository;
 import com.kakaopay.kakao.repository.UserRepository;
 import com.kakaopay.kakao.security.JwtTokenProvider;
 import com.kakaopay.kakao.service.UserService;
 import com.kakaopay.kakao.service.UtilService;
-import com.kakaopay.kakao.util.CouponCreation;
 import com.kakaopay.kakao.vo.ApiResponse;
 import com.kakaopay.kakao.vo.JwtAuthenticationResponse;
 import com.kakaopay.kakao.vo.SignInRequest;
 import com.kakaopay.kakao.vo.SignUpRequest;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +22,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
+@Api(tags={"1. User"})
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
