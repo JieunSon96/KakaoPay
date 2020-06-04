@@ -23,7 +23,7 @@
    * 터미널 환경
    <pre><code>
    $ ./gradlew clean build
-   $ java -jar build/libs/java -jar .\build\libs\kakao-0.0.1-SNAPSHOT.jar
+   $ java -jar kakao-0.0.1-SNAPSHOT.jar
    </code></pre>
    
    * 접속 URI 
