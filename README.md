@@ -19,7 +19,8 @@
  
 빌드 및 실행
 -------------------------
-### 터미널 환경
+
+   * 터미널 환경
    <pre><code>
    $ ./gradlew clean build
    $ java -jar build/libs/java -jar .\build\libs\kakao-0.0.1-SNAPSHOT.jar
