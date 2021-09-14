@@ -1,13 +1,13 @@
-카카오페이 사전과제
+Coupon System
 =====================
 
-### 개발 환경
+### Development Environment
 
- * 기본 환경
+ * Fundamental Environment
     * IDE : IntelliJ IDEA Ultimate
     * OS : Windows
     * GIT
- * 서버
+ * Backend
     * Java 14
     * Spring Boot 2.3.0
     * Gradle
@@ -17,16 +17,15 @@
  
  
  
-빌드 및 실행
+Build and Execution
 -------------------------
-
-   * 터미널 환경
+   * Terminal Environment
    <pre><code>
    $ ./gradlew clean build
    $ java -jar kakao-0.0.1-SNAPSHOT.jar
    </code></pre>
    
-   * 접속 URI 
+   * Access URI 
    <pre><code>http://localhost:5000</code></pre>
 
    * Swagger
@@ -34,29 +33,29 @@
 API List
 ------------------------- 
 
-### 필수 문제
-  1. 쿠폰 생성 API
+### API
+  1. Coupon Generation API
   <pre>
   URL : /api/coupon/createCoupon
   Method : POST</pre>
   
  * Header
  
-  |토큰|인증권한|
-|------|---|
-|Bearer |ADMIN|
+  |Token|Authentication Authority|
+|------|-----|
+|Bearer|ADMIN|
 
 
-  2. 쿠폰 지급 API
+  2. Coupon Payment API
    <pre>
   URL : /api/coupon/payCoupon
   Method : POST</pre>
   
    * Header
    
- |토큰|인증권한|
-|------|---|
-|Bearer |ADMIN,USER|
+ |Token|Authentication Authority|
+ |-----|------------------------|
+|Bearer|     ADMIN,USER         |
 
    * Parameter
    
