@@ -1,24 +1,21 @@
-Coupon System
-=====================
+<img alt="Java" src ="https://img.shields.io/badge/Java-007396.svg?&style=for-the-badge&logo=Java&logoColor=white"/> <img alt="Spring Boot" src ="https://img.shields.io/badge/Spring Boot-6DB33F.svg?&style=for-the-badge&logo=Spring Boot&logoColor=white"/> <img alt="PostgreSQL" src ="https://img.shields.io/badge/PostgreSQL-4169E1.svg?&style=for-the-badge&logo=PostgreSQL&logoColor=white"/> <img alt="Swagger" src ="https://img.shields.io/badge/Swagger-85EA2D.svg?&style=for-the-badge&logo=Swagger&logoColor=white"/> 
 
-### Development Environment
+# Coupon System
+This ia a Functional Backend Stack Coupon System. This is targeting large-scale services. It is built using Java, PostgreSQL, and Spring Boot framework.
 
- * Fundamental Environment
-    * IDE : IntelliJ IDEA Ultimate
-    * OS : Windows
-    * GIT
- * Backend
-    * Java 14
-    * Spring Boot 2.3.0
+
+# Development Stack
+* Programming Language : Java 14
+* Database :  PostgreSQL
+* Framework : Spring Boot 2.3.0
     * Gradle
     * JPA
-    * PostgreSQL
-    * Junit5
- 
- 
- 
-Build and Execution
--------------------------
+    * Junit 5
+* IDE : IntelliJ IDEA Ultimate
+* OS : Windows
+* Version Control : Git
+
+# Build and Execution
    * Terminal Environment
    <pre><code>
    $ ./gradlew clean build
@@ -30,11 +27,10 @@ Build and Execution
 
    * Swagger
    <pre><code>http://localhost:5000/swagger-ui.html</code></pre>
-API List
-------------------------- 
 
-### API
-  1. Coupon Generation API
+# API List
+
+### 1. Coupon Generation API
   <pre>
   URL : /api/coupon/createCoupon
   Method : POST</pre>
@@ -46,7 +42,7 @@ API List
 |Bearer|ADMIN|
 
 
-  2. Coupon Payment API
+###  2. Coupon Payment API
    <pre>
   URL : /api/coupon/payCoupon
   Method : POST</pre>
@@ -59,72 +55,72 @@ API List
 
    * Parameter
    
-  |구분|타입|필수여부|
+  |Value|Type|Required|
 |------|---|---|
 |email|String|Y|
 
-  3. 지급된 쿠폰 조회 API
+###  3. Coupon Retrieval API
    <pre>
   URL : /api/coupon/viewCoupon
   Method : GET</pre>
   
   * Header
    
- |토큰|인증권한|
+ |Token|Authentication Authority|
 |------|---|
 |Bearer |ADMIN,USER|
 
    * Parameter
    
-  |구분|타입|필수여부|
+  |Value|Type|Required|
 |------|---|---|
 |email|String|Y|
 
 
-  4. 지급된 쿠폰 사용 API   
+###  4. Coupon Utilization API   
 <pre>
   URL : /api/coupon/useCoupon/{couponId}/{utilizationStatus}
   Method : GET</pre>
   
   * Header
    
- |토큰|인증권한|
+ |Token|Authentication Authority|
 |------|---|
 |Bearer |USER|
 
    * Parameter
    
-  |구분|타입|필수여부|
+  |Value|Type|Required|
 |------|---|---|
 |email|String|Y|
 |couponId|Long|Y|
 
-5.지급된 쿠폰 취소 API
+### 5. Coupon Cancellation API
 <pre>
   URL : /api/coupon/useCoupon/{couponId}/{utilizationStatus}
   Method : GET</pre>
   
   * Header
    
- |토큰|인증권한|
+ |Token|Authentication Authority|
 |------|---|
 |Bearer |USER|
 
    * Parameter
    
-  |구분|타입|필수여부|
+  |Value|Type|Required|
 |------|---|---|
 |email|String|Y|
 |couponId|Long|Y|
 
-  6. 발급된 당일 만료된 전체 쿠폰 목록 조회 API
+###  6. Expiration Coupons Retrieval API
 <pre>
   URL : /api/coupon/viewExpirationCoupons
   Method : GET</pre>
   
   * Header
    
- |토큰|인증권한|
+ |Token|Authentication Authority|
 |------|---|
 |Bearer |ADMIN|
 
