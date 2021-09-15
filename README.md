@@ -124,67 +124,63 @@ This ia a Functional Backend Stack Coupon System. This is targeting large-scale 
 |------|---|
 |Bearer |ADMIN|
 
-
-### 선택 문제
-  7. 발급된 쿠폰중 만료 3일전 메세지 발송 기능 
-   <pre> 
-   * 스케줄러를 이용하여 매일 오전 9시 30분에 만료 3일 전 쿠폰 조회(getAllCouponsByExpirationDate())
-   * 중복저장을 방지하기 위해 조회 된 데이터가 쿠폰 메세지 테이블에 존재하는지 확인(confirmMessageStoredStatus()), 없는 경우에만 테이블에 저장
-   * 저장시 메세지 확인 컬럼은 default: false
-   * 사용자가 접속해서 메세지를 확인 시 메세지 확인 컬럼은 true로 변경(changeCouponMessageCheckStatus())
-   </pre>
-  
-
-### 제약사항(선택)
- * JWT을 이용하여 Token 기반 API 인증 기능 개발 및 호출
- * Spring Security에서 제공하는 
-   * SignUp 로그인 API 
-   
+###  7. User Registration API 
+ * Spring Security
+ * a token-based api authentication function using jwt
+ 
  <pre>
  URL : /api/user/signup
  Method : POST</pre>
 
    * Parameter
    
-  |구분|타입|필수여부|
+  |Value|Type|Required|
 |------|---|---|
 |email|String|Y|
 |name|String|Y|
 |password|String|Y|   
    
    
-   * SignIn 로그인 API 
+###  8. User Login API 
    <pre>
   URL : /api/user/signin
   Method : POST</pre>
 
   * Parameter
    
-  |구분|타입|필수여부|
+  |Value|Type|Required|
 |------|---|---|
 |email|String|Y|
 |password|String|Y|
 
-문제 해결
--------------------------
-1. 쿠폰번호 생성 방법
- > 1-1. 임의의 문자열 생성 (예시 : dmxcdyf8zo0t13t1ahya)
- 
-  * 쿠폰번호는 해쉬 값과 함께 저장하여 빠르게 탐색
-    * 20자리 영문과 숫자를 혼합하여 랜덤코드 생성
-    * java.util.Random class를 사용
-    * nextBoolean()은 true(소문자),false(랜덤 숫자)를 리턴
-    * nextInt() 메서드를 통해서 반환된 숫자를 62진수로 변환 ([0-9][a-z][A-Z])
-    * 20번 반복하여 만들어진 문자를 모두 StringBuffer로 연결하여 20자리의 임의의 문자열 생성 
+
+## + Message Sending function before 3 days expiration of issued Coupon
+   <pre> 
+   * getAllCouponsByExpirationDate() : the scheduler to check coupons 3 days before expiration at 9:30 AM 
+   * (confirmMessageStoredStatus()) : To prevent duplicate storage, check whether the data is present in the coupon message table , Save it to the table only if data doesn't exist.
+   * message confirmation column -> default: false
+   * changeCouponMessageCheckStatus() : When the user accesses and checks the message, the message confirmation column changes to true.
+   </pre>
+  
+
+## Problem Solving
+1. Coupon Code Generation Method
+ > 1-1. Random String generation (Example : dmxcdyf8zo0t13t1ahya)
+  * Coupon Code stored with Hash value can be fast search
+    * Random code generation mixing 20 digits of English and numbers
+    * Use java.util.Random class
+    * nextBoolean() method return true(lower case),false(random numbers)
+    * nextInt() method convertor returned numbers to 62 digit([0-9][a-z][A-Z])
+    * Random String generation of a 20 digits arbitrary string connecting all characters created by repeating 20 times with StringBuffer 
     
- > 1-2. HashCode 생성 (예시 : 1828977362)    
-  * 생성된 랜덤 코드를 받아서 HashCode를 만들어 함께 저장 
-    * java.util.zip.CRC32를 사용
-    * 랜덤코드를 byte 배열로 변환
-    * byte 배열 값을 update()함수를 이용하여 CRC32 Long형식의 코드를 생성
+ > 1-2. HashCode Generation (Example : 1828977362)    
+  * Get the generated random code, create a Hash Code, and save it together
+    * Use java.util.zip.CRC32
+    * Change the random code to byte array
+    * Create a CRC32 Long-form code using the byte array value update() function
       
   
-  * 현실적인 성능문제 
-     * 적은 개수의 데이터에서는 랜덤코드를 조회하여 생성가능
-     * 하지만 수억개의 데이터를 검색할 시 코드값을 검사하는데 비용이 많이 일어남
-     * 쿠폰코드 발급시 만들어진 해시코드 값을 함께 저장하여 조회 (9991개를 한번에 저장할 시 40초에서 20초로 단축)
+  * Realistic performance issues
+     * From a small number of data, random code can be inquired and generated.
+     * However, when searching hundreds of millions of data, it costs a lot to check the code value.
+     * Inquiry by storing hash code values created when issuing coupon codes (reduced from 40 seconds to 20 seconds when 9,991 pieces are stored at once).
